@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  server_id: 1
+  istance: MyString
+  port: MyString
+  note: MyText
+  check: false
+
+two:
+  server_id: 1
+  istance: MyString
+  port: MyString
+  note: MyText
+  check: false

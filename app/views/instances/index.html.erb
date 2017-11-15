@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Instances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Server</th>
+      <th>Istance</th>
+      <th>Port</th>
+      <th>Note</th>
+      <th>Check</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @instances.each do |instance| %>
+      <tr>
+        <td><%= instance.server_id %></td>
+        <td><%= instance.istance %></td>
+        <td><%= instance.port %></td>
+        <td><%= instance.note %></td>
+        <td><%= instance.check %></td>
+        <td><%= link_to 'Show', instance %></td>
+        <td><%= link_to 'Edit', edit_instance_path(instance) %></td>
+        <td><%= link_to 'Destroy', instance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Instance', new_instance_path %>

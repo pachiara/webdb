@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Server:</strong>
+  <%= @instance.server_id %>
+</p>
+
+<p>
+  <strong>Istance:</strong>
+  <%= @instance.istance %>
+</p>
+
+<p>
+  <strong>Port:</strong>
+  <%= @instance.port %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @instance.note %>
+</p>
+
+<p>
+  <strong>Check:</strong>
+  <%= @instance.check %>
+</p>
+
+<%= link_to 'Edit', edit_instance_path(@instance) %> |
+<%= link_to 'Back', instances_path %>

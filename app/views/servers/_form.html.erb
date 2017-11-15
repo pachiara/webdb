@@ -1,0 +1,65 @@
+<div class="container-fluid form_web col-md-offset-1 col-md-10">
+<%= simple_form_for(server) do |f| %>
+
+  <% if server.errors.any? %>
+    <div class="alert alert-danger">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <div><b> <%= t('actions.attention') %>
+        <%= pluralize(server.errors.count, t('activerecord.errors.messages.error'), t('activerecord.errors.messages.errors')) %>:</b>
+      </div>
+      <ul>
+      <% server.errors.full_messages.each do |message| %>
+        <li  class="fatal_error"><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row col-md-12">
+    <fieldset>
+      <legend>Definisci il server:</legend>
+      <div class="col-md-3">
+        <%= f.input :ip, placeholder: 'xxx.xxx.xxx.xxx', input_html: { size: 15, readonly: @change } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :name, input_html: { size: 50, readonly: @change } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :use, input_html: { size: 20, readonly: @change } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.input :domain, input_html: { size: 10, readonly: @change } %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Caratteristiche:</legend>
+      <div class="col-md-12">
+        <%= f.input :description, as: :text, input_html: { cols: 150, rows: 10, readonly: @change } %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Altro:</legend>
+      <div class="col-md-12">
+        <%= f.input :note, input_html: { cols: 150, rows: 10, readonly: @change } %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Gestione:</legend>
+      <div class="col-md-12">
+        <div><%= f.label :manage %></div>
+        <%= f.input_field :manage, as: :boolean %>
+      </div>
+    </fieldset>
+    </br></br>
+    <div class="col-md-12">
+      <%= link_to servers_path, :class => "btn btn-default btn-lg", :title => t('actions.back'), :alt => t('actions.back') do %>
+        <span class="glyphicon glyphicon-arrow-left"></span> <%= t('actions.back') %>
+      <% end %>
+      <%= button_tag(type: 'submit', class: "btn btn-primary btn-lg") do %>
+        <span class="glyphicon glyphicon-ok glyphicon-inverse"></span> <%= t('actions.update') %>
+      <% end %>
+      </br></br>
+    </div>
+  </div>
+<% end %>
+</div>

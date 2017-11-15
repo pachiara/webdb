@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ip: MyString
+  name: MyString
+  use: MyString
+  description: MyText
+  note: MyText
+  domain: MyString
+  manage: false
+
+two:
+  ip: MyString
+  name: MyString
+  use: MyString
+  description: MyText
+  note: MyText
+  domain: MyString
+  manage: false
