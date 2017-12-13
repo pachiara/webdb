@@ -219,10 +219,16 @@ it:
         errors: "errori"
         taken: "è già in uso"
         format_invalid: "Formato non valido"
-
+      models:
+        user:
+          attributes:
+            email:
+              invalid_domain: "dominio invalido"
+              
     models:
       server: Server
-      instance: Istanza
+      instance: Istanza DATABASE
+      instances: Istanze DATABASE
       email: Email
       user: Utente
       users: Utenti
@@ -237,7 +243,7 @@ it:
         domain: "Dominio"
         manage: "Gestito"
       instance:
-        instance: "Istanza"
+        name: "Istanza"
         port: "Porta"
         note: "Note"
         check: "Controllo"
@@ -265,13 +271,16 @@ it:
     release: "Rilascia"
     report: "Stampa"
     email: "Email"
+    instances: "Gestisci Database"
 
   will_paginate:
     next_label: "&raquo;"
     previous_label: "&laquo;"
 
   title: "Gestione dei DATABASE"
+  sign: "WEBDB"
 
   notice:
-    create: "Server creato con successo"
-    update: "Server aggiornato con successo"
+    create: "creato con successo"
+    update: "aggiornato con successo"
+    delete: "cancellato con successo"

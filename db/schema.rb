@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115123728) do
+ActiveRecord::Schema.define(version: 20171116084953) do
 
   create_table "instances", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "server_id"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20171115123728) do
     t.boolean "check"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["server_id", "id"], name: "index_instances_on_server_id_and_id"
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

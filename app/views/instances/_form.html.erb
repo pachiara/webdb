@@ -1,42 +1,63 @@
-<%= form_with(model: instance, local: true) do |form| %>
-  <% if instance.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(instance.errors.count, "error") %> prohibited this instance from being saved:</h2>
-
-      <ul>
-      <% instance.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="container-fluid form_web col-md-offset-1 col-md-10">
+<%= simple_form_for @instance, :url => @url do |f| %>
+  <% if @instance.errors.any? %>
+   <div class="alert alert-danger">
+  	<a class="close" data-dismiss="alert">&#215;</a>
+    <div><b> <%= t('actions.attention') %>
+      <%= pluralize(@instance.errors.count, t('activerecord.errors.messages.error'), t('activerecord.errors.messages.errors')) %>:</b>
     </div>
+    <ul>
+    <% @instance.errors.full_messages.each do |msg| %>
+      <li class="fatal_error"><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :server_id %>
-    <%= form.number_field :server_id, id: :instance_server_id %>
+<div class="row col-md-12">
+  <fieldset>
+    <legend>Server:</legend>
+    <div class="col-md-3">
+      <%= f.input :server_id, as: :hidden %>
+      <b><%= @server.ip %></b>
+    </div>
+    <div class="col-md-9">
+      <b><%= @server.name %></b>
+    </div>
+  </fieldset>
+  </br></br>
+  <fieldset>
+    <legend>Database:</legend>
+    <div class="col-md-9">
+      <%= f.input :name, input_html: { size: 10 } %>
+    </div>
+    <div class="col-md-3">
+      <%= f.input :port, input_html: { size: 10, readonly: @change } %>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Note:</legend>
+    <div class="col-md-12">
+      <%= f.input :note, input_html: { cols: 150, rows: 10, readonly: @change } %>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Controllo:</legend>
+    <div class="col-md-12">
+      <div><%= f.label :check %></div>
+      <%= f.input_field :check, as: :boolean %>
+    </div>
+  </fieldset>
+  </br></br>
+  <div class="col-md-12">
+    <%= link_to server_instances_path, :class => "btn btn-default btn-lg", :title => t('actions.back'), :alt => t('actions.back') do %>
+      <span class="glyphicon glyphicon-arrow-left"></span> <%= t('actions.back') %>
+    <% end %>
+    <%= button_tag(type: 'submit', class: "btn btn-primary btn-lg") do %>
+      <span class="glyphicon glyphicon-ok glyphicon-inverse"></span> <%= t('actions.update') %>
+    <% end %>
+    </br></br>
   </div>
-
-  <div class="field">
-    <%= form.label :istance %>
-    <%= form.text_field :istance, id: :instance_istance %>
-  </div>
-
-  <div class="field">
-    <%= form.label :port %>
-    <%= form.text_field :port, id: :instance_port %>
-  </div>
-
-  <div class="field">
-    <%= form.label :note %>
-    <%= form.text_area :note, id: :instance_note %>
-  </div>
-
-  <div class="field">
-    <%= form.label :check %>
-    <%= form.check_box :check, id: :instance_check %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+</div>
 <% end %>
+</div>

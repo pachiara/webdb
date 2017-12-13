@@ -5,7 +5,7 @@
 	    Utente: <%= current_user.email %>
 	    <% end %>
     </span>
-    <nav class="tools_utente hidden-xs pull-right" role="menu">
+    <nav class="tools_utente" role="menu">
       <% if user_signed_in? %>
       <% if current_user.has_role? :admin %>
       <%= link_to admin_users_path, :role => "menuitem" do %>

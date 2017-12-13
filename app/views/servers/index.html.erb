@@ -10,7 +10,7 @@
     <th class="panel-lispa"><%= t('activerecord.attributes.server.note') %></th>
     <th class="panel-lispa"><%= t('activerecord.attributes.server.domain') %></th>
     <th class="panel-lispa"><%= t('activerecord.attributes.server.manage') %></th>
-    <th class="panel-lispa" colspan=2><%= t('actions.actions') %></th>
+    <th class="panel-lispa" colspan=3><%= t('actions.actions') %></th>
   </tr>
   </thead>
   <tbody>
@@ -22,7 +22,12 @@
         <td><%= server.description %></td>
         <td><%= server.note %></td>
         <td><%= server.domain %></td>
-        <td><%= server.manage %></td>
+        <td>
+          <% if server.manage %>
+            <span class="label label-success">Sì</span>
+          <% else %>
+            <span class="label label-danger">No</span>
+          <% end %>
         <td>
           <% if @edit then @class = "btn btn-primary" else @class = "btn btn-primary disabled" end %>
           <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span>'),
@@ -33,6 +38,11 @@
           <%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'),
           server, method: :delete, data: { confirm: t('actions.are_you_sure'), toggle: "tooltip", placement: "left" },
           class: @class, title: t('actions.destroy'), alt: t('actions.destroy') %>
+        </td>
+        <td>
+          <% if @edit then @class = "btn btn-primary" else @class = "btn btn-primary disabled" end %>
+          <%= link_to raw('<span class="glyphicon glyphicon-edit"></span>'),
+          server_instances_path(server), class: @class, title: t('actions.instances'), alt: t('actions.instances'), data: {toggle: "tooltip", placement: "left" } %>
         </td>
       </tr>
     <% end %>

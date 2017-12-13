@@ -1,0 +1,11 @@
+<div class="col-md-12">
+  <div class="col-md-3">
+    <!--%= render 'search_server' %-->
+  </div>
+  <div class="col-md-2">
+    <%= render 'per_page_instance' %>
+  </div>
+  <div class="col-md-offset-1">
+    <%= unless @instances.nil?; will_paginate @instances, :renderer => BootstrapPagination::Rails; end %>
+  </div>
+</div>

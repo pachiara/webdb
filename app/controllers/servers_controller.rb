@@ -10,7 +10,7 @@ class ServersController < ApplicationController
     @edit   = helpers.set_edit(current_user)
     @manage = helpers.set_manage(current_user)
     # paginazione
-    if params[:page].nil? && !session[:sever_page].nil?
+    if params[:page].nil? && !session[:server_page].nil?
       params[:page] = session[:server_page]
     end
     if params[:per_page].nil? && !session[:server_per_page].nil?
@@ -18,11 +18,10 @@ class ServersController < ApplicationController
     end
     # default 10 righe per pagina
     if params[:per_page].nil? || params[:per_page].to_s.strip.length == 0
-      params[:per_page] = 2
+      params[:per_page] = 5
     end
     # ricerca
     @servers = Server.paginate(page: params[:page], per_page: params[:per_page])
-#    @servers = Server.all
 
     # salva valori in sessione
     session[:server_page] = params[:page]
@@ -83,7 +82,7 @@ class ServersController < ApplicationController
   def destroy
     @server.destroy
     respond_to do |format|
-      format.html { redirect_to servers_url, notice: 'Server was successfully destroyed.' }
+      format.html { redirect_to servers_url, notice: t('notice.delete') }
       format.json { head :no_content }
     end
   end
