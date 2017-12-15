@@ -23,6 +23,8 @@ it:
         timeout: "Sessione scaduta, accedere nuovamente per continuare."
         inactive: "Il tuo account non è stato ancora attivato."
         not_found_in_database: "Utente non trovato nel database"
+      admin_user:
+        not_found_in_database: "Utente amministrativo non trovato nel database"
     sessions:
       signed_in: "Accesso effettuato con successo."
       signed_out: "Sei uscito correttamente."
