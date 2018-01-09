@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214162551) do
+ActiveRecord::Schema.define(version: 20180109201212) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -67,7 +67,9 @@ ActiveRecord::Schema.define(version: 20171214162551) do
     t.boolean "check"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "service_id"
     t.index ["server_id", "id"], name: "index_instances_on_server_id_and_id"
+    t.index ["service_id"], name: "index_instances_on_service_id"
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -84,14 +86,18 @@ ActiveRecord::Schema.define(version: 20171214162551) do
   create_table "servers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "ip", limit: 15
     t.string "name", limit: 50
-    t.string "use", limit: 20
     t.text "description"
     t.text "note"
-    t.string "domain", limit: 10
     t.boolean "manage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "use_id"
+    t.bigint "domain_id"
+    t.bigint "type_id"
+    t.index ["domain_id"], name: "index_servers_on_domain_id"
     t.index ["ip"], name: "index_servers_on_ip"
+    t.index ["type_id"], name: "index_servers_on_type_id"
+    t.index ["use_id"], name: "index_servers_on_use_id"
   end
 
   create_table "services", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -140,4 +146,8 @@ ActiveRecord::Schema.define(version: 20171214162551) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "instances", "services"
+  add_foreign_key "servers", "domains"
+  add_foreign_key "servers", "types"
+  add_foreign_key "servers", "uses"
 end

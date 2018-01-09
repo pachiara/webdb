@@ -9,23 +9,14 @@ class ServersController < ApplicationController
     @title = t('actions.listing') + " " + t('activerecord.models.server')
     @edit   = helpers.set_edit(current_user)
     @manage = helpers.set_manage(current_user)
+
     # paginazione
-    if params[:page].nil? && !session[:server_page].nil?
-      params[:page] = session[:server_page]
-    end
-    if params[:per_page].nil? && !session[:server_per_page].nil?
-      params[:per_page] = session[:server_per_page]
-    end
     # default 10 righe per pagina
     if params[:per_page].nil? || params[:per_page].to_s.strip.length == 0
       params[:per_page] = 5
     end
     # ricerca
-    @servers = Server.paginate(page: params[:page], per_page: params[:per_page])
-
-    # salva valori in sessione
-    session[:server_page] = params[:page]
-    session[:server_per_page] = params[:per_page]
+    @servers = Server.page(params[:page]).per(params[:per_page])
 
   end
 
@@ -95,6 +86,6 @@ class ServersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def server_params
-      params.require(:server).permit(:ip, :name, :use, :description, :note, :domain, :manage)
+      params.require(:server).permit(:ip, :name, :use_id, :description, :note, :domain_id, :manage)
     end
 end

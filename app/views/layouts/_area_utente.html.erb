@@ -8,8 +8,8 @@
     <nav class="tools_utente" role="menu">
       <% if user_signed_in? %>
       <% if current_user.has_role? :admin %>
-      <%= link_to admin_users_path, :role => "menuitem" do %>
-        <span class="glyphicon glyphicon-asterisk white" role="presentation"></span> Gestisci Utenti
+      <%= link_to admin_root_path, :role => "menuitem" do %>
+        <span class="glyphicon glyphicon-asterisk white" role="presentation"></span> Gestisci
       <% end %>
       <% end %>
       <% end %>

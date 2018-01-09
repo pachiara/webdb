@@ -18,5 +18,10 @@ if defined?(WillPaginate)
     module CollectionMethods
       alias_method :num_pages, :total_pages
     end
+    module ClassMethods
+      def paginate(options = {})
+        page(options[:page]).per(options[:per_page])
+      end
+    end
   end
 end

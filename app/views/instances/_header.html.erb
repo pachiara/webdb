@@ -6,6 +6,6 @@
     <%= render 'per_page_instance' %>
   </div>
   <div class="col-md-offset-1">
-    <%= unless @instances.nil?; will_paginate @instances, :renderer => BootstrapPagination::Rails; end %>
+    <%= unless @instances.nil?; paginate @instances; end %>
   </div>
 </div>

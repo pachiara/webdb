@@ -18,10 +18,10 @@
       <tr>
         <td><%= server.ip %></td>
         <td><%= server.name %></td>
-        <td><%= server.use %></td>
+        <td><%= server.use.description %></td>
         <td><%= server.description %></td>
         <td><%= server.note %></td>
-        <td><%= server.domain %></td>
+        <td><%= server.domain.description %></td>
         <td>
           <% if server.manage %>
             <span class="label label-success">Sì</span>

@@ -1,7 +1,12 @@
 ActiveAdmin.register Use do
-  show do
-    
-  end
+#show do
+#    h3 t('actions.show') + " " + t('activerecord.models.use')
+#    attributes_table do
+#      row :code
+#      row :description
+#    end
+#    active_admin_comments
+#end
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

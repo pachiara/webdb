@@ -13,22 +13,12 @@ class InstancesController < ApplicationController
     @server = Server.find(params[:server_id])
 
     # paginazione
-    if params[:page].nil? && !session[:istance_page].nil?
-      params[:page] = session[:istance_page]
-    end
-    if params[:per_page].nil? && !session[:istance_per_page].nil?
-      params[:per_page] = session[:istance_per_page]
-    end
     # default 10 righe per pagina
     if params[:per_page].nil? || params[:per_page].to_s.strip.length == 0
       params[:per_page] = 5
     end
     # ricerca
-    @instances = @server.instances.paginate(page: params[:page], per_page: params[:per_page])
-
-    # salva valori in sessione
-    session[:istance_page] = params[:page]
-    session[:istance_per_page] = params[:per_page]
+    @instances = @server.instances.page(params[:page]).per(params[:per_page])
 
   end
 

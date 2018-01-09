@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class RolesController < ApplicationController
   before_action :authenticate_user!
 
   def users

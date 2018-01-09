@@ -66,8 +66,9 @@ end
 gem 'jquery-rails'
 # gemme per l'interfaccia UI
 gem 'bootstrap-sass'
-gem 'will_paginate'
-gem 'will_paginate-bootstrap'
+# gem 'will_paginate'
+# gem 'will_paginate-bootstrap'
+gem 'kaminari'
 gem 'simple_form'
 # pdf
 # gem 'prawn_rails'
@@ -77,3 +78,4 @@ gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 gem 'activeadmin'
+gem 'formadmin'

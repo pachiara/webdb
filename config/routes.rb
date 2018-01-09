@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   resources :types
   resources :domains
   resources :uses
-  get 'admin/users'
-  post   'admin/role/:id', to: 'admin#add_role', as: 'admin/add_role'
-  delete 'admin/role/:id', to: 'admin#remove_role', as: 'admin/remove_role'
+
+  get 'roles/users'
+  post   'roles/role/:id', to: 'roles#add_role', as: 'roles/add_role'
+  delete 'roles/role/:id', to: 'roles#remove_role', as: 'roles/remove_role'
 
   devise_for :users
   get 'welcome/index'

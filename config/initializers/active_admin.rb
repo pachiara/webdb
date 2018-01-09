@@ -186,6 +186,7 @@ ActiveAdmin.setup do |config|
   # resources or you can enable them globally from here.
   #
   # config.create_another = true
+  config.create_another = true
 
   # == Register Stylesheets & Javascripts
   #
@@ -231,7 +232,16 @@ ActiveAdmin.setup do |config|
   #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
   #     end
   #   end
-
+  config.namespace :admin do |admin|
+    admin.build_menu do |menu|
+      menu.add label: "WebDB", url: "/", priority: 0
+      menu.add label: "Altri siti" do |sites|
+      sites.add label: "WebIP",
+                url: "http://127.0.0.1:4000",
+                html_options: { target: :blank }
+      end
+    end
+  end
   # == Download Links
   #
   # You can disable download links on resource listing pages,

@@ -224,7 +224,7 @@ it:
           attributes:
             email:
               invalid_domain: "dominio invalido"
-              
+
     models:
       server: Server
       instance: Istanza DATABASE
@@ -232,6 +232,13 @@ it:
       email: Email
       user: Utente
       users: Utenti
+      use: Uso
+      type: Tipo
+      service: Servizio
+      domain: Dominio
+      comment: Commento
+      command: Comando
+      admin_user: Untente amministrativo
 
     attributes:
       server:
@@ -257,6 +264,7 @@ it:
     back: "Annulla"
     new: "Inserisci"
     listing: "Elenco"
+    show: "Mostra"
     search: "Ricerca"
     back_to: "Torna a"
     users: "Utenti"
@@ -273,9 +281,23 @@ it:
     email: "Email"
     instances: "Gestisci Database"
 
-  will_paginate:
-    next_label: "&raquo;"
-    previous_label: "&laquo;"
+# kaminari pagination
+  views:
+    pagination:
+      first: "&laquo; Prima"
+      last: "Ultima &raquo;"
+      previous: "&lsaquo; Precedente"
+      next: "Sucessiva &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "Non trovato %{entry_name}"
+          one: "Visualizzo <b>1</b> %{entry_name}"
+          other: "Visualizzo <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Visualizzo %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in totale"
 
   title: "Gestione dei DATABASE"
   sign: "WEBDB"
@@ -284,3 +306,6 @@ it:
     create: "creato con successo"
     update: "aggiornato con successo"
     delete: "cancellato con successo"
+
+  active_admin:
+    create_another: "Crea ancora"

@@ -25,10 +25,10 @@
         <%= f.input :name, input_html: { size: 50, readonly: @change } %>
       </div>
       <div class="col-md-3">
-        <%= f.input :use, input_html: { size: 20, readonly: @change } %>
+        <%= f.association :use, label_method: :description %>
       </div>
       <div class="col-md-3">
-        <%= f.input :domain, input_html: { size: 10, readonly: @change } %>
+        <%= f.association :domain, label_method: :description %>
       </div>
     </fieldset>
     <fieldset>
