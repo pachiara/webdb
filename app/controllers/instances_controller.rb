@@ -66,6 +66,8 @@ class InstancesController < ApplicationController
   # PATCH/PUT servers/1/instances/1.json
   def update
     @title = t('actions.edit') + " " + t('activerecord.models.instance')
+    @url = server_instance_path
+    @server = Server.find(params[:server_id])
 
     respond_to do |format|
       if @instance.update(instance_params)
@@ -97,6 +99,6 @@ class InstancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def instance_params
-      params.require(:instance).permit(:server_id, :name, :port, :note, :check)
+      params.require(:instance).permit(:server_id, :name, :port, :service_id, :note, :check)
     end
 end

@@ -253,6 +253,7 @@ it:
         name: "Istanza"
         port: "Porta"
         note: "Note"
+        service: "Servizio"
         check: "Controllo"
 
   actions:

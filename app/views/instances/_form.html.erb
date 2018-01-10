@@ -1,63 +1,66 @@
 <div class="container-fluid form_web col-md-offset-1 col-md-10">
 <%= simple_form_for @instance, :url => @url do |f| %>
   <% if @instance.errors.any? %>
-   <div class="alert alert-danger">
-  	<a class="close" data-dismiss="alert">&#215;</a>
-    <div><b> <%= t('actions.attention') %>
-      <%= pluralize(@instance.errors.count, t('activerecord.errors.messages.error'), t('activerecord.errors.messages.errors')) %>:</b>
+    <div class="alert alert-danger">
+  	  <a class="close" data-dismiss="alert">&#215;</a>
+      <div><b> <%= t('actions.attention') %>
+        <%= pluralize(@instance.errors.count, t('activerecord.errors.messages.error'), t('activerecord.errors.messages.errors')) %>:</b>
+      </div>
+      <ul>
+        <% @instance.errors.full_messages.each do |msg| %>
+          <li class="fatal_error"><%= msg %></li>
+        <% end %>
+      </ul>
     </div>
-    <ul>
-    <% @instance.errors.full_messages.each do |msg| %>
-      <li class="fatal_error"><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
   <% end %>
 
-<div class="row col-md-12">
-  <fieldset>
-    <legend>Server:</legend>
-    <div class="col-md-3">
-      <%= f.input :server_id, as: :hidden %>
-      <b><%= @server.ip %></b>
-    </div>
-    <div class="col-md-9">
-      <b><%= @server.name %></b>
-    </div>
-  </fieldset>
-  </br></br>
-  <fieldset>
-    <legend>Database:</legend>
-    <div class="col-md-9">
-      <%= f.input :name, input_html: { size: 10 } %>
-    </div>
-    <div class="col-md-3">
-      <%= f.input :port, input_html: { size: 10, readonly: @change } %>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend>Note:</legend>
-    <div class="col-md-12">
-      <%= f.input :note, input_html: { cols: 150, rows: 10, readonly: @change } %>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend>Controllo:</legend>
-    <div class="col-md-12">
-      <div><%= f.label :check %></div>
-      <%= f.input_field :check, as: :boolean %>
-    </div>
-  </fieldset>
-  </br></br>
-  <div class="col-md-12">
-    <%= link_to server_instances_path, :class => "btn btn-default btn-lg", :title => t('actions.back'), :alt => t('actions.back') do %>
-      <span class="glyphicon glyphicon-arrow-left"></span> <%= t('actions.back') %>
-    <% end %>
-    <%= button_tag(type: 'submit', class: "btn btn-primary btn-lg") do %>
-      <span class="glyphicon glyphicon-ok glyphicon-inverse"></span> <%= t('actions.update') %>
-    <% end %>
+  <div class="row col-md-12">
+    <fieldset>
+      <legend>Server:</legend>
+      <div class="col-md-3">
+        <%= f.input :server_id, as: :hidden %>
+        <b><%= @server.ip %></b>
+      </div>
+      <div class="col-md-9">
+        <b><%= @server.name %></b>
+      </div>
+    </fieldset>
     </br></br>
+    <fieldset>
+      <legend>Database:</legend>
+      <div class="col-md-5">
+        <%= f.input :name, input_html: { size: 10 } %>
+      </div>
+      <div class="col-md-2">
+        <%= f.input :port, input_html: { size: 10, readonly: @change } %>
+      </div>
+      <div class="col-md-5">
+        <%= f.association :service, label_method: :description %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Note:</legend>
+      <div class="col-md-12">
+        <%= f.input :note, input_html: { cols: 150, rows: 10, readonly: @change } %>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Controllo:</legend>
+      <div class="col-md-12">
+        <div><%= f.label :check %></div>
+        <%= f.input_field :check, as: :boolean %>
+      </div>
+    </fieldset>
+    </br></br>
+    <div class="col-md-12">
+      <%= link_to server_instances_path, :class => "btn btn-default btn-lg", :title => t('actions.back'), :alt => t('actions.back') do %>
+        <span class="glyphicon glyphicon-arrow-left"></span> <%= t('actions.back') %>
+      <% end %>
+      <%= button_tag(type: 'submit', class: "btn btn-primary btn-lg") do %>
+        <span class="glyphicon glyphicon-ok glyphicon-inverse"></span> <%= t('actions.update') %>
+      <% end %>
+      </br></br>
+    </div>
   </div>
-</div>
 <% end %>
 </div>
