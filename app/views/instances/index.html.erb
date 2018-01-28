@@ -8,7 +8,8 @@
 	  <div class="panel-title">
 	  	&nbsp&nbsp <%= t('activerecord.attributes.server.ip') %>: <strong><%= @server.ip %></strong>
 	    &nbsp&nbsp <%= t('activerecord.attributes.server.name') %>: <strong><%= @server.name %></strong>
-  	    &nbsp&nbsp <%= t('activerecord.attributes.server.use') %>: <strong><%= @server.use.description %></strong>
+  	  &nbsp&nbsp <%= t('activerecord.attributes.server.use') %>: <strong><%= @server.use.description %></strong>
+      &nbsp&nbsp <%= t('activerecord.attributes.server.type') %>: <strong><%= @server.type.description %></strong>
 	    &nbsp&nbsp <%= t('activerecord.attributes.server.domain') %>: <strong><%= @server.domain.description %></strong>
 	    <span id="img-panel" class="glyphicon glyphicon-plus pull-right"></span>
 	  </div>
@@ -51,7 +52,7 @@
     <th class="panel-lispa"><%= t('activerecord.attributes.instance.port') %></th>
     <th class="panel-lispa"><%= t('activerecord.attributes.instance.note') %></th>
     <th class="panel-lispa"><%= t('activerecord.attributes.instance.check') %></th>
-    <th class="panel-lispa" colspan=3><%= t('actions.actions') %></th>
+    <th class="panel-lispa" colspan=4><%= t('actions.actions') %></th>
   </tr>
   </thead>
   <tbody>
@@ -68,6 +69,11 @@
             <span class="label label-danger">No</span>
           <% end %>
         <td>
+        <td>
+          <% if @edit then @class = "btn btn-primary" else @class = "btn btn-primary disabled" end %>
+          <%= link_to raw('<span class="glyphicon glyphicon-check"></span>'),
+          edit_server_instance_path(instance.server_id, instance), class: @class, title: t('actions.check'), alt: t('actions.check'), data: {toggle: "tooltip", placement: "left" } %>
+        </td>
         <td>
           <% if @edit then @class = "btn btn-primary" else @class = "btn btn-primary disabled" end %>
           <%= link_to raw('<span class="glyphicon glyphicon-pencil"></span>'),

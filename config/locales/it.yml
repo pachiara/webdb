@@ -245,6 +245,7 @@ it:
         ip: "Indirizzo IP"
         name: "Hostname"
         use: "Uso"
+        type: "Tipo"
         description: "Descrizione"
         note: "Note"
         domain: "Dominio"
@@ -281,6 +282,7 @@ it:
     report: "Stampa"
     email: "Email"
     instances: "Gestisci Database"
+    check: "Controlla"
 
 # kaminari pagination
   views:

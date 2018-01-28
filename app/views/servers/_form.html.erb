@@ -18,10 +18,13 @@
   <div class="row col-md-12">
     <fieldset>
       <legend>Definisci il server:</legend>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <%= f.input :ip, placeholder: 'xxx.xxx.xxx.xxx', input_html: { size: 15, readonly: @change } %>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
+        <%= f.association :type, label_method: :description %>
+      </div>
+      <div class="col-md-2">
         <%= f.input :name, input_html: { size: 50, readonly: @change } %>
       </div>
       <div class="col-md-3">

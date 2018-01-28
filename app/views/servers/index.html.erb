@@ -6,6 +6,7 @@
     <th class="panel-lispa"><%= t('activerecord.attributes.server.ip') %></th>
     <th class="panel-lispa"><%= t('activerecord.attributes.server.name') %></th>
     <th class="panel-lispa"><%= t('activerecord.attributes.server.use') %></th>
+    <th class="panel-lispa"><%= t('activerecord.attributes.server.type') %></th>
     <th class="panel-lispa"><%= t('activerecord.attributes.server.description') %></th>
     <th class="panel-lispa"><%= t('activerecord.attributes.server.note') %></th>
     <th class="panel-lispa"><%= t('activerecord.attributes.server.domain') %></th>
@@ -18,10 +19,11 @@
       <tr>
         <td><%= server.ip %></td>
         <td><%= server.name %></td>
-        <td><%= server.use.description %></td>
+        <td><%= unless server.use.nil?; server.use.description; end %></td>
+        <td><%= unless server.type.nil?; server.type.description; end %></td>
         <td><%= server.description %></td>
         <td><%= server.note %></td>
-        <td><%= server.domain.description %></td>
+        <td><%= unless server.domain.nil?; server.domain.description; end %></td>
         <td>
           <% if server.manage %>
             <span class="label label-success">Sì</span>
