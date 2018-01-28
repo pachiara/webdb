@@ -234,10 +234,10 @@ ActiveAdmin.setup do |config|
   #   end
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
-      menu.add label: "WebDB", url: "/", priority: 0
+      menu.add label: "WebDB", url: "http://webdb.lispadev.local/webdb", priority: 0
       menu.add label: "Altri siti" do |sites|
       sites.add label: "WebIP",
-                url: "http://127.0.0.1:4000",
+                url: "http://webip.lispadev.local/webip",
                 html_options: { target: :blank }
       end
     end
