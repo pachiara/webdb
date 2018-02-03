@@ -1,6 +1,6 @@
 class InstancesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_instance, only: [:show, :edit, :update, :destroy]
+  before_action :set_instance, only: [:show, :edit, :update, :destroy, :check]
 
   # GET servers/1/instances
   # GET servers/1/instances.json
@@ -11,6 +11,7 @@ class InstancesController < ApplicationController
     @manage = helpers.set_manage(current_user)
     # legge server
     @server = Server.find(params[:server_id])
+    @commands = Command.all
 
     # paginazione
     # default 10 righe per pagina
@@ -91,6 +92,13 @@ class InstancesController < ApplicationController
     end
   end
 
+  # GET servers/1/instances/1/check/1
+  # GET servers/1/instances/1/check/1.json
+  def check
+    @command = Command.find(params[:command_id])
+    @result = %x[#{@command.exec} -lart]
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_instance
@@ -99,6 +107,6 @@ class InstancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def instance_params
-      params.require(:instance).permit(:server_id, :name, :port, :service_id, :note, :check)
+      params.require(:instance).permit(:server_id, :name, :port, :service_id, :note, :check, :command_id)
     end
 end

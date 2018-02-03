@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   resources :servers do
     resources :instances
   end
+  get 'servers/:server_id/instances/:id/check/:command_id', to: 'instances#check', as: 'instances/check'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

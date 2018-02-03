@@ -256,6 +256,8 @@ it:
         note: "Note"
         service: "Servizio"
         check: "Controllo"
+      command:
+        code:  "Comando"  
 
   actions:
     actions: "Azioni"

@@ -1,3 +1,4 @@
+<%= render 'header_sub1' %>
 <div class="col-md-12">
 <%= render 'header' %>
 <br /><br />
@@ -68,11 +69,6 @@
           <% else %>
             <span class="label label-danger">No</span>
           <% end %>
-        <td>
-        <td>
-          <% if @edit then @class = "btn btn-primary" else @class = "btn btn-primary disabled" end %>
-          <%= link_to raw('<span class="glyphicon glyphicon-check"></span>'),
-          edit_server_instance_path(instance.server_id, instance), class: @class, title: t('actions.check'), alt: t('actions.check'), data: {toggle: "tooltip", placement: "left" } %>
         </td>
         <td>
           <% if @edit then @class = "btn btn-primary" else @class = "btn btn-primary disabled" end %>
@@ -84,6 +80,26 @@
           <%= link_to raw('<span class="glyphicon glyphicon-trash"></span>'),
           server_instance_path(instance.server_id, instance), method: :delete, data: { confirm: t('actions.are_you_sure'), toggle: "tooltip", placement: "left" },
           class: @class, title: t('actions.destroy'), alt: t('actions.destroy') %>
+        </td>
+        <td>
+          <% if @edit then @class = "btn btn-primary" else @class = "btn btn-primary disabled" end %>
+          <a class="<%= @class %> glyphicon glyphicon-check" role="button" data-toggle="collapse" href="#collapseArea<%= instance.id %>"
+            aria-expanded="false" aria-controls="collapseArea<%= instance.id %>" title="<%= t('actions.check') %>" alt="<%= t('actions.check') %>">
+          </a>
+          <div class="collapse well-command" id="collapseArea<%= instance.id %>">
+            <table class="table table-striped table-condensed table-hover">
+              <tbody>
+                <tr>
+                <% @commands.each do |command| %>
+                  <td>
+                    <%= link_to command.code, instances_check_path(instance.server_id, instance, command.id),
+                        class: @class, role: "button", title: command.code, alt:command.code %>
+                  </td>
+                <% end %>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </td>
       </tr>
     <% end %>
