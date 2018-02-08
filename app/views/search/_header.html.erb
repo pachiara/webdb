@@ -1,0 +1,13 @@
+<div class="container-fluid">
+<div class="col-md-12">
+  <div class="col-md-6">
+    <%= render 'search_server' %>
+  </div>
+  <div class="col-md-2">
+    <%= render 'per_page_server' %>
+  </div>
+  <div class="col-md-offset-1">
+    <%= unless @servers.nil?; paginate @servers; end %>
+  </div>
+</div>
+</div>

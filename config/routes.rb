@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'search/index'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :commands

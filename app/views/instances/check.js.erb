@@ -1,6 +1,1 @@
-<%= render 'header_sub1' %>
-<div class="col-md-12">
-<%= render 'header' %>
-<br /><br />
-  <%= @result %>
-</div>
+$("#result<%= @instance.id %>").html("<%= @result.to_json %>");

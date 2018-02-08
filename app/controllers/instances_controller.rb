@@ -96,7 +96,11 @@ class InstancesController < ApplicationController
   # GET servers/1/instances/1/check/1.json
   def check
     @command = Command.find(params[:command_id])
-    @result = %x[#{@command.exec} -lart]
+    @result = %x[#{@command.exec}; echo "#{@instance.name}/#{@instance.port}"]
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private
