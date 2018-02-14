@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180109201212) do
+ActiveRecord::Schema.define(version: 20180214130301) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -68,8 +68,10 @@ ActiveRecord::Schema.define(version: 20180109201212) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "service_id"
+    t.bigint "service_type_id"
     t.index ["server_id", "id"], name: "index_instances_on_server_id_and_id"
     t.index ["service_id"], name: "index_instances_on_service_id"
+    t.index ["service_type_id"], name: "index_instances_on_service_type_id"
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -98,6 +100,13 @@ ActiveRecord::Schema.define(version: 20180109201212) do
     t.index ["ip"], name: "index_servers_on_ip"
     t.index ["type_id"], name: "index_servers_on_type_id"
     t.index ["use_id"], name: "index_servers_on_use_id"
+  end
+
+  create_table "service_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "code"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "services", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -146,6 +155,7 @@ ActiveRecord::Schema.define(version: 20180109201212) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "instances", "service_types"
   add_foreign_key "instances", "services"
   add_foreign_key "servers", "domains"
   add_foreign_key "servers", "types"

@@ -16,7 +16,7 @@ class ServersController < ApplicationController
       params[:per_page] = 5
     end
     # ricerca
-    @servers = Server.page(params[:page]).per(params[:per_page])
+    @servers = Server.order("ip").page(params[:page]).per(params[:per_page])
 
   end
 

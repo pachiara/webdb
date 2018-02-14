@@ -111,6 +111,6 @@ class InstancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def instance_params
-      params.require(:instance).permit(:server_id, :name, :port, :service_id, :note, :check, :command_id)
+      params.require(:instance).permit(:server_id, :name, :port, :service_id, :service_type_id, :note, :check, :command_id)
     end
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :service_types
   get 'search/index'
 
   devise_for :admin_users, ActiveAdmin::Devise.config

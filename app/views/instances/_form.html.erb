@@ -27,15 +27,18 @@
     </fieldset>
     </br></br>
     <fieldset>
-      <legend>Database:</legend>
-      <div class="col-md-5">
+      <legend>Servizio:</legend>
+      <div class="col-md-3">
         <%= f.input :name, input_html: { size: 10 } %>
       </div>
       <div class="col-md-2">
         <%= f.input :port, input_html: { size: 10, readonly: @change } %>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-4">
         <%= f.association :service, label_method: :description %>
+      </div>
+      <div class="col-md-3">
+        <%= f.association :service_type, label_method: :code %>
       </div>
     </fieldset>
     <fieldset>

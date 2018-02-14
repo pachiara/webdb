@@ -1,25 +1,50 @@
 <div class="col-md-12">
 <%= render 'header' %>
 <table class="table table-striped table-condensed table-hover">
-  <thead>
-  <tr>
-    <th class="panel-lispa"><%= t('activerecord.attributes.server.ip') %></th>
-    <th class="panel-lispa"><%= t('activerecord.attributes.server.name') %></th>
-    <th class="panel-lispa"><%= t('activerecord.attributes.server.use') %></th>
-    <th class="panel-lispa"><%= t('activerecord.attributes.server.type') %></th>
-    <th class="panel-lispa"><%= t('activerecord.attributes.server.description') %></th>
-  </tr>
-  </thead>
   <tbody>
-    <% @servers.each do |server| %>
+    <% @instances.each do |instance| %>
+      <% unless instance.server.ip == @rottura %>
       <tr>
-        <td><%= server.ip %></td>
-        <td><%= server.name %></td>
-        <td><%= unless server.use.nil?; server.use.description; end %></td>
-        <td><%= unless server.type.nil?; server.type.description; end %></td>
-        <td><%= server.description %></td>
+        <th class="panel-lispa"><%= instance.server.ip %></th>
+        <th class="panel-lispa"><%= instance.server.name %></th>
+        <th class="panel-lispa">
+          <% if instance.server.manage %>
+            <span class="label label-success">Gestito</span>
+          <% else %>
+            <span class="label label-danger">Non Gestito</span>
+          <% end %>
+        </th>
+        <th class="panel-lispa"><%= unless instance.server.use.nil?; instance.server.use.description; end %></th>
+        <th class="panel-lispa"><%= unless instance.server.type.nil?; instance.server.type.description; end %></th>
+        <th class="panel-lispa"><%= instance.server.description %></th>
+      </tr>
+      <% @rottura = instance.server.ip %>
+      <tr>
+        <th class="panel-lispa"><%= t('activerecord.attributes.instance.service') %></th>
+        <th class="panel-lispa"><%= t('activerecord.attributes.instance.service_type') %></th>
+        <th class="panel-lispa"><%= t('activerecord.attributes.instance.name') %></th>
+        <th class="panel-lispa"><%= t('activerecord.attributes.instance.port') %></th>
+        <th class="panel-lispa"><%= t('activerecord.attributes.instance.note') %></th>
+        <th class="panel-lispa"><%= t('activerecord.attributes.instance.check') %></th>
+      </tr>
+      <% end %>
+      <tbody>
+      <tr>
+        <td><span class="glyphicon glyphicon-chevron-right">&nbsp;&nbsp;&nbsp;&nbsp;</span><%= unless instance.service.nil?; instance.service.description; end %></td>
+        <td><%= unless instance.service_type.nil?; instance.service_type.code; end %></td>
+        <td><%= instance.name %></td>
+        <td><%= instance.port %></td>
+        <td><%= instance.note %></td>
+        <td>
+          <% if instance.check %>
+            <span class="label label-success">Sì</span>
+          <% else %>
+            <span class="label label-danger">No</span>
+          <% end %>
+        </td>
+      </tr>
+      </tbody>
     <% end %>
   </tbody>
 </table>
-
 </div>

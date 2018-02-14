@@ -2,7 +2,7 @@
 <%= form_tag search_index_path, method: 'get', class: "form-group form-inline", role: "form" do %>
 <div class="form-group">
   <%= label_tag 'manage', 'Gestito' %>
-  <%= check_box_tag "manage", params[:manage] %>
+  <%= check_box_tag "manage", params[:manage], if params[:manage] == "on" then true else false end %>
 </div>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div class="input-group">

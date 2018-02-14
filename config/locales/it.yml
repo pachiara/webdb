@@ -238,6 +238,7 @@ it:
       domain: Dominio
       comment: Commento
       command: Comando
+      service_type: Tipo Servizio
       admin_user: Untente amministrativo
 
     attributes:
@@ -255,9 +256,10 @@ it:
         port: "Porta"
         note: "Note"
         service: "Servizio"
+        service_type: "Tipo Servizio"
         check: "Controllo"
       command:
-        code:  "Comando"  
+        code:  "Comando"
 
   actions:
     actions: "Azioni"
