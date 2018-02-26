@@ -4,7 +4,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "WebDB"
+  config.site_title = "WebDev"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -234,7 +234,7 @@ ActiveAdmin.setup do |config|
   #   end
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
-      menu.add label: "WebDB", url: "http://webdb.lispadev.local/webdb", priority: 0
+      menu.add label: "WebDev", url: "http://webdev.lispadev.local/webdev", priority: 0
       menu.add label: "Altri siti" do |sites|
       sites.add label: "WebIP",
                 url: "http://webip.lispadev.local/webip",
@@ -295,7 +295,7 @@ ActiveAdmin.setup do |config|
   # override the content of the footer here.
   #
   # config.footer = 'my custom footer text'
-  config.footer = 'WebDB Gestione dei DATABASE'
+  config.footer = 'WebDev Gestione delle Instanze'
 
   # == Sorting
   #

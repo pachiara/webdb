@@ -17,11 +17,22 @@ class SearchController < ApplicationController
     end
     if params[:manage] == "on" then manage = '1' else manage = '0' end
 
-
     # ricerca
+    sel = params[:sel]
+    searched = params[:searched]
+    if sel.nil? then sel = '1' end
+    case sel
+      when '1'
+        @instances = Instance.joins(:server).where("servers.manage = ? AND servers.description LIKE ?", manage, "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
+      when '2'
+        @instances = Instance.joins(:server).where("servers.manage = ? AND servers.name LIKE ?", manage, "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
+      when '3'
+        @instances = Instance.joins(:server).where("servers.manage = ? AND servers.ip LIKE ?", manage, "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
+    end
+
 #    @servers = Server.page(params[:page]).per(params[:per_page])
 #    @servers = Server.where("manage = ?", manage).page(params[:page]).per(params[:per_page])
-     @instances = Instance.joins(:server).where("servers.manage = ?", manage).order("servers.ip").page(params[:page]).per(params[:per_page])
+#      @instances = Instance.joins(:server).where("servers.manage = ?", manage).order("servers.ip").page(params[:page]).per(params[:per_page])
 #    @instances = Instance.page(params[:page]).per(params[:per_page])
 
     session[:search_manage] = params[:manage]

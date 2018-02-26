@@ -1,4 +1,5 @@
 class InstancesController < ApplicationController
+  protect_from_forgery with: :null_session, if: ->{request.format.json?}
   before_action :authenticate_user!
   before_action :set_instance, only: [:show, :edit, :update, :destroy, :check]
 
@@ -33,6 +34,7 @@ class InstancesController < ApplicationController
     @title = t('actions.new') + " " + t('activerecord.models.instance')
     @server = Server.find(params[:server_id])
     @instance = Instance.new
+    @service = Service.new
     @url = server_instances_path
   end
 
@@ -41,6 +43,7 @@ class InstancesController < ApplicationController
     @title = t('actions.edit') + " " + t('activerecord.models.instance')
     @server = Server.find(params[:server_id])
     @url = server_instance_path
+    @service = Service.find(@instance.service_id)
   end
 
   # POST servers/1/instances
@@ -50,6 +53,7 @@ class InstancesController < ApplicationController
     @instance = Instance.new(instance_params)
     @server = Server.find(params[:server_id])
     @instance.server_id = params[:server_id]
+    @service = Service.find(@instance.service_id)
     @url = server_instances_path
 
     respond_to do |format|
@@ -99,6 +103,25 @@ class InstancesController < ApplicationController
     @result = %x[#{@command.exec}; echo "#{@instance.name}/#{@instance.port}"]
     respond_to do |format|
       format.html
+      format.js
+    end
+  end
+
+  # GET instances/search_service/1
+  # GET instances/search_service/1.json
+  def search_service
+    @service = Service.find(params[:service_id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # GET instances/reload_service/1
+  # GET instances/reload_service/1.json
+  def reload_service
+    @service = Service.find(params[:service_id])
+    respond_to do |format|
       format.js
     end
   end

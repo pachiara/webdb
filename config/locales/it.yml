@@ -227,8 +227,8 @@ it:
 
     models:
       server: Server
-      instance: Istanza DATABASE
-      instances: Istanze DATABASE
+      instance: Istanza Infrastruttura
+      instances: Istanze Infrastruttura
       email: Email
       user: Utente
       users: Utenti
@@ -259,7 +259,15 @@ it:
         service_type: "Tipo Servizio"
         check: "Controllo"
       command:
-        code:  "Comando"
+        code: "Comando"
+      service:
+        code: "Codice"
+        description: "Descrizione"
+        card: "Scheda"
+        department: "Dipartimento"
+        area: "Area"
+        referent: "Referente"
+        state: "Stato"
 
   actions:
     actions: "Azioni"
@@ -285,7 +293,7 @@ it:
     release: "Rilascia"
     report: "Stampa"
     email: "Email"
-    instances: "Gestisci Database"
+    instances: "Gestisci Instanze"
     check: "Controlla"
 
 # kaminari pagination
@@ -306,8 +314,8 @@ it:
       more_pages:
         display_entries: "Visualizzo %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in totale"
 
-  title: "Gestione dei DATABASE"
-  sign: "WEBDB"
+  title: "Gestione delle Instanze"
+  sign: "WEBDEV"
 
   notice:
     create: "creato con successo"

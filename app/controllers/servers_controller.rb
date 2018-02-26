@@ -13,7 +13,7 @@ class ServersController < ApplicationController
     # paginazione
     # default 10 righe per pagina
     if params[:per_page].nil? || params[:per_page].to_s.strip.length == 0
-      params[:per_page] = 5
+      params[:per_page] = 15
     end
     # ricerca
     @servers = Server.order("ip").page(params[:page]).per(params[:per_page])

@@ -36,41 +36,21 @@
       </div>
       <div class="col-md-4">
         <div class="pull-left">
-          <%= f.label :service %>
-          <div class="input-group">
-            <%= f.association :service, label_method: :description, label: false, input_html: {class: "pull-left form-control"} %>
-            <script>
-              $("#instance_service_id").change(function() {
-                $.ajax({
-                    type: 'GET',
-                    url: '/instances/reload_service/'+$('#instance_service_id').val()
-                });
-              })
-            </script>
-          </div>
+        <%= f.label :service %>
+        <div class="input-group">
+          <%= f.association :service, label_method: :description, label: false, input_html: {class: "pull-left form-control"} %>
+          <span class="input-group-btn">
+            <%= link_to raw('<span class="glyphicon glyphicon-search"></span>'), "#", id: "search",
+            class: "btn btn-primary", title: t('actions.search'), alt: t('actions.search'), remote: true,
+            data: {turbolinks: "false", toggle: "modal", target: "#search_modal", keyboard: "false", placement: "left" } %>
+          </span>
+          <%= render 'instances/search_service' %>
+        </div>
         </div>
       </div>
       <div class="col-md-3">
         <%= f.association :service_type, label_method: :code %>
       </div>
-      <% unless @service.nil? %>
-      <div class="col-md-12">
-        <table class="table table-striped table-condensed table-hover">
-          <tr>
-            <th> <%= t('activerecord.attributes.service.department') %> </th>
-            <th> <%= t('activerecord.attributes.service.area') %> </th>
-            <th> <%= t('activerecord.attributes.service.referent') %> </th>
-            <th> <%= t('activerecord.attributes.service.state') %> </th>
-          </tr>
-          <tr>
-            <td id="td1"><%= @service.department %></td>
-            <td id="td2"><%= @service.area %></td>
-            <td id="td3"><%= @service.referent %></td>
-            <td id="td4"><%= @service.state %></td>
-          </tr>
-        </table>
-      </div>
-      <% end %>
     </fieldset>
     <fieldset>
       <legend>Note:</legend>

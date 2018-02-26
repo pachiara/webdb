@@ -8,8 +8,8 @@ class User < ApplicationRecord
   validate  :email_domain
 
   def email_domain
-    if !WEBDB['users_email_domain_validation_regex'].nil?
-      r = Regexp.new(WEBDB['users_email_domain_validation_regex'])
+    if !WEBDEV['users_email_domain_validation_regex'].nil?
+      r = Regexp.new(WEBDEV['users_email_domain_validation_regex'])
       if (r =~ email).nil?
         errors.add(:email, :invalid_domain)
       end

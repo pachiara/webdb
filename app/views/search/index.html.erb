@@ -5,18 +5,18 @@
     <% @instances.each do |instance| %>
       <% unless instance.server.ip == @rottura %>
       <tr>
-        <th class="panel-lispa"><%= instance.server.ip %></th>
-        <th class="panel-lispa"><%= instance.server.name %></th>
-        <th class="panel-lispa">
+        <th class="panel-light"><%= instance.server.description %></th>
+        <th class="panel-light"><%= instance.server.name %></th>
+        <th class="panel-light"><%= instance.server.ip %></th>
+        <th class="panel-light">
           <% if instance.server.manage %>
             <span class="label label-success">Gestito</span>
           <% else %>
             <span class="label label-danger">Non Gestito</span>
           <% end %>
         </th>
-        <th class="panel-lispa"><%= unless instance.server.use.nil?; instance.server.use.description; end %></th>
-        <th class="panel-lispa"><%= unless instance.server.type.nil?; instance.server.type.description; end %></th>
-        <th class="panel-lispa"><%= instance.server.description %></th>
+        <th class="panel-light"><%= unless instance.server.use.nil?; instance.server.use.description; end %></th>
+        <th class="panel-light"><%= unless instance.server.type.nil?; instance.server.type.description; end %></th>
       </tr>
       <% @rottura = instance.server.ip %>
       <tr>
@@ -30,7 +30,7 @@
       <% end %>
       <tbody>
       <tr>
-        <td><span class="glyphicon glyphicon-chevron-right">&nbsp;&nbsp;&nbsp;&nbsp;</span><%= unless instance.service.nil?; instance.service.description; end %></td>
+        <td><span class="glyphicon glyphicon-chevron-right">&nbsp;&nbsp;&nbsp;&nbsp;</span><%= unless instance.service.nil?; link_to instance.service.description, instance.service.card; end %></td>
         <td><%= unless instance.service_type.nil?; instance.service_type.code; end %></td>
         <td><%= instance.name %></td>
         <td><%= instance.port %></td>
