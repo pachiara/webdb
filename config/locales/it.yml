@@ -252,7 +252,7 @@ it:
         domain: "Dominio"
         manage: "Gestito"
       instance:
-        name: "Istanza"
+        name: "Istanza / UID"
         port: "Porta"
         note: "Note"
         service: "Servizio"
@@ -314,7 +314,7 @@ it:
       more_pages:
         display_entries: "Visualizzo %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in totale"
 
-  title: "Gestione delle Instanze"
+  title: "Gestione delle Applicazioni"
   sign: "WEBDEV"
 
   notice:
