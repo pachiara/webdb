@@ -22,12 +22,16 @@ class SearchController < ApplicationController
     searched = params[:searched]
     if sel.nil? then sel = '1' end
     case sel
-      when '1'
+      when '1' # descrizione del server
         @instances = Instance.joins(:server).where("servers.manage = ? AND servers.description LIKE ?", manage, "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
-      when '2'
+      when '2' # hostname
         @instances = Instance.joins(:server).where("servers.manage = ? AND servers.name LIKE ?", manage, "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
-      when '3'
+      when '3' # indirizzo IP
         @instances = Instance.joins(:server).where("servers.manage = ? AND servers.ip LIKE ?", manage, "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
+      when '4' # servizio
+        @instances = Instance.joins(:server).where("servers.manage = ?", manage).joins(:service).where("service.description LIKE ?", "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
+      when '5' # sistema operativo
+        @instances = Instance.joins(:server).where("servers.manage = ?", manage).joins(:operating_system).where("operating_system.description LIKE ?", "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
     end
 
 #    @servers = Server.page(params[:page]).per(params[:per_page])
