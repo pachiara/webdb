@@ -73,7 +73,7 @@ CREATE TABLE `admin_users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_admin_users_on_email` (`email`),
   UNIQUE KEY `index_admin_users_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `admin_users` (
 
 LOCK TABLES `admin_users` WRITE;
 /*!40000 ALTER TABLE `admin_users` DISABLE KEYS */;
-INSERT INTO `admin_users` VALUES (1,'admin@lispa.it','$2a$11$S3XSOW/eBXYZTo1hVfn6Q..qNyY7M9fA.Xdg3Vllqvo8nlESof05m',NULL,NULL,NULL,3,'2017-12-15 10:39:06','2017-12-14 16:35:06','127.0.0.1','127.0.0.1','2017-12-14 16:33:12','2017-12-15 12:23:31'),(2,'chiara.palmieri@lispa.it','$2a$11$TbcQgEi7Dm7Oo13VSvZR/.ljZ5tIIJu1c7BkWoBF3hJrzpCxEDi9S',NULL,NULL,NULL,15,'2018-02-26 13:36:51','2018-02-08 19:15:00','127.0.0.1','127.0.0.1','2017-12-15 10:51:15','2018-02-26 13:36:51');
+INSERT INTO `admin_users` VALUES (1,'admin@lispa.it','$2a$11$S3XSOW/eBXYZTo1hVfn6Q..qNyY7M9fA.Xdg3Vllqvo8nlESof05m',NULL,NULL,NULL,3,'2017-12-15 10:39:06','2017-12-14 16:35:06','127.0.0.1','127.0.0.1','2017-12-14 16:33:12','2017-12-15 12:23:31'),(2,'chiara.palmieri@lispa.it','$2a$11$TbcQgEi7Dm7Oo13VSvZR/.ljZ5tIIJu1c7BkWoBF3hJrzpCxEDi9S',NULL,NULL,NULL,15,'2018-02-26 13:36:51','2018-02-08 19:15:00','127.0.0.1','127.0.0.1','2017-12-15 10:51:15','2018-02-26 13:36:51'),(3,'mauro.magatti@lispa.it','$2a$11$ibG7ZeO.ib5MjB/ZHtXHHu/M5xQuBf8nu1kzwx6K7I3x83u1dkvqS',NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,'2018-02-27 19:15:36','2018-02-27 19:15:36');
 /*!40000 ALTER TABLE `admin_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,8 +127,10 @@ CREATE TABLE `commands` (
   `exec` varchar(255) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `unix` tinyint(1) DEFAULT NULL,
+  `win` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +139,7 @@ CREATE TABLE `commands` (
 
 LOCK TABLES `commands` WRITE;
 /*!40000 ALTER TABLE `commands` DISABLE KEYS */;
-INSERT INTO `commands` VALUES (1,'Stato','Stato Utenti','','ls','2017-12-14 20:45:26','2018-02-01 15:54:04'),(2,'Utenti','Stato degli utenti dell\'istanza db','','','2018-01-30 14:39:37','2018-01-30 14:39:37'),(3,'Dimensioni','Dimensioni dei datafile dell\'istanza db','','','2018-01-30 14:40:23','2018-01-30 14:40:23'),(4,'Versione','Versione del database','','','2018-01-30 14:40:50','2018-01-30 14:40:50'),(5,'DBLINK','Verifica presenza dblink','','','2018-02-05 11:41:41','2018-02-05 11:41:41');
+INSERT INTO `commands` VALUES (1,'Stato','Stato Utenti','','ps aux|grep mysql','2017-12-14 20:45:26','2018-03-06 12:55:26',1,0),(2,'Utenti','Stato degli utenti dell\'istanza db','','who','2018-01-30 14:39:37','2018-03-06 13:42:12',1,0),(3,'Dimensioni','Dimensioni dei datafile dell\'istanza db','','','2018-01-30 14:40:23','2018-03-06 13:41:10',1,0),(4,'Versione','Versione del database','select * from v$version where banner like \'Oracle%\';','','2018-01-30 14:40:50','2018-03-06 13:39:58',1,1),(5,'DBLINK','Verifica presenza dblink','select * from dba_db_links;','','2018-02-05 11:41:41','2018-03-06 13:24:52',1,1),(6,'Stato','Stato Utenti','','dir','2018-03-06 12:53:18','2018-03-06 12:55:10',0,1),(7,'Dimensioni','Dimensioni dei datafile dell\'istanza db','','','2018-03-06 13:41:42','2018-03-06 13:41:42',0,1);
 /*!40000 ALTER TABLE `commands` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,7 +194,7 @@ CREATE TABLE `instances` (
   KEY `index_instances_on_service_type_id` (`service_type_id`),
   CONSTRAINT `fk_rails_2b02568b04` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`),
   CONSTRAINT `fk_rails_6725ecd2d1` FOREIGN KEY (`service_type_id`) REFERENCES `service_types` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,8 +203,63 @@ CREATE TABLE `instances` (
 
 LOCK TABLES `instances` WRITE;
 /*!40000 ALTER TABLE `instances` DISABLE KEYS */;
-INSERT INTO `instances` VALUES (1,7,'ORADB4','1523','',1,'2018-02-21 20:22:45','2018-02-26 13:19:06',39,1),(2,7,'ORADB2','1522','',0,'2018-02-21 20:23:23','2018-02-21 20:23:37',25,1),(3,11,'webapp','8080','',1,'2018-02-22 10:05:17','2018-02-22 10:05:17',1,2),(4,11,'NAR','8080','',1,'2018-02-22 10:05:50','2018-02-22 10:05:50',495,2),(5,7,'ORADB2','1523','',0,'2018-02-23 09:14:22','2018-02-23 09:14:22',32,1),(6,3,'APP','8080','',1,'2018-02-23 09:15:17','2018-02-23 09:15:17',12,2),(7,3,'NAR','8080','anagrafica assistiti',1,'2018-02-23 09:16:29','2018-02-23 09:16:29',495,2);
+INSERT INTO `instances` VALUES (1,7,'ORADB4','1523','',1,'2018-02-21 20:22:45','2018-02-26 13:19:06',39,1),(2,7,'ORADB2','1522','',0,'2018-02-21 20:23:23','2018-02-21 20:23:37',25,1),(3,11,'webapp','8080','',1,'2018-02-22 10:05:17','2018-02-22 10:05:17',1,2),(4,11,'NAR','8080','',1,'2018-02-22 10:05:50','2018-02-22 10:05:50',495,2),(5,7,'ORADB2','1523','',0,'2018-02-23 09:14:22','2018-02-23 09:14:22',32,1),(6,3,'APP','8080','',1,'2018-02-23 09:15:17','2018-02-23 09:15:17',12,2),(7,3,'NAR','8080','anagrafica assistiti',1,'2018-02-23 09:16:29','2018-02-23 09:16:29',495,2),(8,2,'webapp','8080','',1,'2018-03-06 13:08:10','2018-03-06 13:08:10',17,2);
 /*!40000 ALTER TABLE `instances` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `operating_systems`
+--
+
+DROP TABLE IF EXISTS `operating_systems`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `operating_systems` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `unix` tinyint(1) DEFAULT NULL,
+  `win` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `operating_systems`
+--
+
+LOCK TABLES `operating_systems` WRITE;
+/*!40000 ALTER TABLE `operating_systems` DISABLE KEYS */;
+INSERT INTO `operating_systems` VALUES (1,'lin','Linux','2018-03-05 14:52:29','2018-03-06 13:19:45',1,0),(2,'win','Windows','2018-03-05 14:52:38','2018-03-06 13:19:33',0,1),(3,'sol','Solaris','2018-03-05 14:52:48','2018-03-06 13:19:23',1,0),(4,'aix','Aix','2018-03-05 18:57:06','2018-03-06 13:19:10',1,0);
+/*!40000 ALTER TABLE `operating_systems` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `os`
+--
+
+DROP TABLE IF EXISTS `os`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `os` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `os`
+--
+
+LOCK TABLES `os` WRITE;
+/*!40000 ALTER TABLE `os` DISABLE KEYS */;
+/*!40000 ALTER TABLE `os` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -255,7 +312,7 @@ CREATE TABLE `schema_migrations` (
 
 LOCK TABLES `schema_migrations` WRITE;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('20171103161758'),('20171103171859'),('20171104210933'),('20171104211217'),('20171115123728'),('20171116084953'),('20171214161754'),('20171214161757'),('20171214161800'),('20171214161803'),('20171214161807'),('20171214162547'),('20171214162551'),('20171219142914'),('20180109175311'),('20180109175332'),('20180109195454'),('20180109195503'),('20180109201059'),('20180109201212'),('20180214120342'),('20180214130301'),('20180221101529'),('20180221102741');
+INSERT INTO `schema_migrations` VALUES ('20171103161758'),('20171103171859'),('20171104210933'),('20171104211217'),('20171115123728'),('20171116084953'),('20171214161754'),('20171214161757'),('20171214161800'),('20171214161803'),('20171214161807'),('20171214162547'),('20171214162551'),('20171219142914'),('20180109175311'),('20180109175332'),('20180109195454'),('20180109195503'),('20180109201059'),('20180109201212'),('20180214120342'),('20180214130301'),('20180221101529'),('20180221102741'),('20180305132119'),('20180305142729'),('20180305150411'),('20180306124540'),('20180306131603');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,13 +335,16 @@ CREATE TABLE `servers` (
   `use_id` bigint(20) DEFAULT NULL,
   `domain_id` bigint(20) DEFAULT NULL,
   `type_id` bigint(20) DEFAULT NULL,
+  `operating_system_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_servers_on_ip` (`ip`),
   KEY `index_servers_on_use_id` (`use_id`),
   KEY `index_servers_on_domain_id` (`domain_id`),
   KEY `index_servers_on_type_id` (`type_id`),
+  KEY `index_servers_on_operating_system_id` (`operating_system_id`),
   CONSTRAINT `fk_rails_05115db0cb` FOREIGN KEY (`domain_id`) REFERENCES `domains` (`id`),
   CONSTRAINT `fk_rails_21ff577371` FOREIGN KEY (`type_id`) REFERENCES `types` (`id`),
+  CONSTRAINT `fk_rails_263f69daea` FOREIGN KEY (`operating_system_id`) REFERENCES `operating_systems` (`id`),
   CONSTRAINT `fk_rails_26f724bd42` FOREIGN KEY (`use_id`) REFERENCES `uses` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -295,7 +355,7 @@ CREATE TABLE `servers` (
 
 LOCK TABLES `servers` WRITE;
 /*!40000 ALTER TABLE `servers` DISABLE KEYS */;
-INSERT INTO `servers` VALUES (1,'10.200.52.92','ITORALINUX41','Porta di Dominio','data base pdd',1,'2017-11-03 22:55:37','2018-02-08 18:34:43',1,3,2),(2,'10.200.8.25','QC','data base quality center','uso Saverio',1,'2017-11-03 22:59:32','2017-11-03 22:59:32',2,1,NULL),(3,'10.200.4.2','ITZSOL1SOL10','Dominio centrale','',1,'2017-11-03 23:09:14','2018-02-19 20:53:55',3,1,1),(6,'10.200.8.26','ITORALINUX30','Server per test','',1,'2017-11-14 20:39:29','2017-11-14 20:40:32',4,2,NULL),(7,'10.200.4.1','ITZSOL1SOL20','Sistema centrale','annotazione',1,'2017-11-14 20:56:25','2018-02-19 21:02:11',1,1,1),(8,'10.200.52.80','QDFF','Dominio SISS','',1,'2017-11-14 21:10:58','2018-02-19 21:02:35',2,2,2),(9,'10.200.52.90','ITZSOL1SOL11','ambiente di prova','Usato da ciceri',1,'2017-11-15 12:54:16','2018-02-19 20:58:11',3,3,3),(10,'10.200.8.27','ITORALINUX41','','',1,'2017-11-27 15:40:04','2018-02-22 10:37:53',3,2,1),(11,'10.202.32.5','HPCZ5','','',1,'2018-02-22 10:02:38','2018-02-22 10:02:38',1,2,1);
+INSERT INTO `servers` VALUES (1,'10.200.52.92','ITORALINUX41','Porta di Dominio','data base pdd',1,'2017-11-03 22:55:37','2018-02-08 18:34:43',1,3,2,NULL),(2,'10.200.8.25','QC','data base quality center','uso Saverio',1,'2017-11-03 22:59:32','2018-03-06 13:07:23',2,1,1,2),(3,'10.200.4.2','ITZSOL1SOL10','Dominio centrale','',1,'2017-11-03 23:09:14','2018-03-05 18:59:46',3,1,1,3),(6,'10.200.8.26','ITORALINUX30','Server per test','',1,'2017-11-14 20:39:29','2017-11-14 20:40:32',4,2,NULL,NULL),(7,'10.200.4.1','ITZSOL1SOL20','Sistema centrale','annotazione',1,'2017-11-14 20:56:25','2018-03-05 15:16:32',1,1,1,1),(8,'10.200.52.80','QDFF','Dominio SISS','',1,'2017-11-14 21:10:58','2018-02-19 21:02:35',2,2,2,NULL),(9,'10.200.52.90','ITZSOL1SOL11','ambiente di prova','Usato da ciceri',1,'2017-11-15 12:54:16','2018-02-19 20:58:11',3,3,3,NULL),(10,'10.200.8.27','ITORALINUX41','','',1,'2017-11-27 15:40:04','2018-02-22 10:37:53',3,2,1,NULL),(11,'10.202.32.5','HPCZ5','','',1,'2018-02-22 10:02:38','2018-02-22 10:02:38',1,2,1,NULL);
 /*!40000 ALTER TABLE `servers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -485,4 +545,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-27 14:51:20
+-- Dump completed on 2018-03-06 20:27:40
