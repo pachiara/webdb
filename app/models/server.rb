@@ -7,6 +7,7 @@ class Server < ApplicationRecord
   belongs_to :use
   belongs_to :domain
   belongs_to :type
+  belongs_to :operating_system
 
   def ip_valid
     begin

@@ -240,6 +240,7 @@ it:
       command: Comando
       service_type: Tipo Servizio
       admin_user: Untente amministrativo
+      operating_system: Sistema Operativo
 
     attributes:
       server:
@@ -251,6 +252,7 @@ it:
         note: "Note"
         domain: "Dominio"
         manage: "Gestito"
+        operating_system: "S.O."
       instance:
         name: "Istanza / UID"
         port: "Porta"
@@ -268,6 +270,9 @@ it:
         area: "Area"
         referent: "Referente"
         state: "Stato"
+      operating_system:
+        code: "Codice"
+        description: "Descrizione"
 
   actions:
     actions: "Azioni"

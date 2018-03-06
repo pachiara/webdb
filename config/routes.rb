@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :operating_systems
+  resources :os
   resources :service_types
   get 'search/index'
 

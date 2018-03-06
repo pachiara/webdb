@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221102741) do
+ActiveRecord::Schema.define(version: 20180306131603) do
 
   create_table "active_admin_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "namespace"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20180221102741) do
     t.string "exec"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "unix"
+    t.boolean "win"
   end
 
   create_table "domains", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -74,6 +76,22 @@ ActiveRecord::Schema.define(version: 20180221102741) do
     t.index ["service_type_id"], name: "index_instances_on_service_type_id"
   end
 
+  create_table "operating_systems", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "code"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "unix"
+    t.boolean "win"
+  end
+
+  create_table "os", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "code"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "resource_type"
@@ -96,8 +114,10 @@ ActiveRecord::Schema.define(version: 20180221102741) do
     t.bigint "use_id"
     t.bigint "domain_id"
     t.bigint "type_id"
+    t.bigint "operating_system_id"
     t.index ["domain_id"], name: "index_servers_on_domain_id"
     t.index ["ip"], name: "index_servers_on_ip"
+    t.index ["operating_system_id"], name: "index_servers_on_operating_system_id"
     t.index ["type_id"], name: "index_servers_on_type_id"
     t.index ["use_id"], name: "index_servers_on_use_id"
   end
@@ -164,6 +184,7 @@ ActiveRecord::Schema.define(version: 20180221102741) do
   add_foreign_key "instances", "service_types"
   add_foreign_key "instances", "services"
   add_foreign_key "servers", "domains"
+  add_foreign_key "servers", "operating_systems"
   add_foreign_key "servers", "types"
   add_foreign_key "servers", "uses"
 end

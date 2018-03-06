@@ -69,6 +69,6 @@ class CommandsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def command_params
-      params.require(:command).permit(:code, :description, :query, :exec)
+      params.require(:command).permit(:code, :description, :query, :exec, :unix, :win)
     end
 end

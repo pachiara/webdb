@@ -11,6 +11,7 @@
 	    &nbsp&nbsp <%= t('activerecord.attributes.server.name') %>: <strong><%= @server.name %></strong>
   	  &nbsp&nbsp <%= t('activerecord.attributes.server.use') %>: <strong><%= unless @server.use.nil?; @server.use.description; end %></strong>
       &nbsp&nbsp <%= t('activerecord.attributes.server.type') %>: <strong><%= unless @server.type.nil?; @server.type.description; end %></strong>
+      &nbsp&nbsp <%= t('activerecord.attributes.server.operating_system') %>: <strong><%= unless @server.operating_system.nil?; @server.operating_system.description; end %></strong>
 	    &nbsp&nbsp <%= t('activerecord.attributes.server.domain') %>: <strong><%= unless @server.domain.nil?; @server.domain.description; end %></strong>
 	    <span id="img-panel" class="glyphicon glyphicon-plus pull-right"></span>
 	  </div>
@@ -96,9 +97,17 @@
                 <tr>
                 <% @commands.each do |command| %>
                   <td>
+                    <% if command.unix and @server.operating_system.unix %>
                     <%= link_to command.code, instances_check_path(instance.server_id, instance, command.id),
                         class: @class, role: "button", title: command.description, alt:command.description,
                         remote: true %>
+                    <% else %>
+                    <% if command.win and @server.operating_system.win %>
+                    <%= link_to command.code, instances_check_path(instance.server_id, instance, command.id),
+                        class: @class, role: "button", title: command.description, alt:command.description,
+                        remote: true %>
+                    <% end %>
+                    <% end %>
                   </td>
                 <% end %>
                 </tr>

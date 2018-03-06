@@ -1,4 +1,4 @@
-ActiveAdmin.register Command do
+ActiveAdmin.register OperatingSystem do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -11,5 +11,5 @@ ActiveAdmin.register Command do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-  permit_params :code, :description, :query, :exec, :unix, :win
+  permit_params :code, :description, :unix, :win
 end

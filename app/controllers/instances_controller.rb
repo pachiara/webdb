@@ -100,7 +100,14 @@ class InstancesController < ApplicationController
   # GET servers/1/instances/1/check/1.json
   def check
     @command = Command.find(params[:command_id])
-    @result = %x[#{@command.exec}; echo "#{@instance.name}/#{@instance.port}"]
+    @server = Server.find(params[:server_id])
+    #    @result = %x[#{@command.exec}; echo "#{@instance.name}/#{@instance.port}"]
+
+    if @command.query.blank?
+      @result = %x[#{@command.exec}]
+    else
+      @result = %x[#{@command.query}]
+    end
     respond_to do |format|
       format.html
       format.js
