@@ -6,12 +6,14 @@
 </div>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <div class="input-group">
-  <span class="input-group-addon">
-    <button id="selector" type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Descrizione<span class="caret"></span></button>
+  <span class="input-group-btn">
+    <button id="selector" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ricerca per ...<span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li><a id="search_description" href="javascript:void(0)" onclick="searchFunc(this);">Descrizione</a></li>
-      <li><a id="search_host" href="javascript:void(0)" onclick="searchFunc(this);">Hostname</a></li>
-      <li><a id="search_ip" href="javascript:void(0)"   onclick="searchFunc(this);">IP</a></li>
+      <li><a id="search_host"        href="javascript:void(0)" onclick="searchFunc(this);">Hostname</a></li>
+      <li><a id="search_ip"          href="javascript:void(0)" onclick="searchFunc(this);">IP</a></li>
+      <li><a id="search_service"     href="javascript:void(0)" onclick="searchFunc(this);">Servizio</a></li>
+      <li><a id="search_so"          href="javascript:void(0)" onclick="searchFunc(this);">Sistema Operativo</a></li>
     </ul>
   </span>
   <%= text_field_tag :searched, params[:searched], :class => "pull-left form-control", :placeholder => 'Testo ...', :type => "search" %>
@@ -42,7 +44,7 @@ $("#manage").change(function() {
 });
 function searchFunc(obj) {
   switch(obj.id) {
-    case "search_note":
+    case "search_description":
       $('#selector').html('Descrizione<span class="caret">');
       $('#sel').val('1');
       $('#searched').attr('placeholder','Testo ...');
@@ -58,6 +60,18 @@ function searchFunc(obj) {
       $('#selector').html('IP<span class="caret">');
       $('#sel').val('3');
       $('#searched').attr('placeholder','xxx.xxx.xxx.xxx');
+      $('#searched').val("");
+      break;
+    case "search_service":
+      $('#selector').html('Servizio<span class="caret">');
+      $('#sel').val('4');
+      $('#searched').attr('placeholder','Servizio ...');
+      $('#searched').val("");
+      break;
+    case "search_so":
+      $('#selector').html('Sistema Operativo<span class="caret">');
+      $('#sel').val('5');
+      $('#searched').attr('placeholder','Sistema Operativo ...');
       $('#searched').val("");
       break;
     default:
