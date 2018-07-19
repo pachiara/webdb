@@ -7,33 +7,31 @@
     </span>
     <nav class="tools_utente" role="menu">
       <% if user_signed_in? %>
-      <% if current_user.has_role? :admin %>
-      <%= link_to admin_root_path, :role => "menuitem" do %>
-        <span class="glyphicon glyphicon-asterisk white" role="presentation"></span> Gestisci
-      <% end %>
-      <% end %>
-      <% end %>
-    <%= link_to search_index_path, role: "menuitem", data: {turbolinks: "false"} do %>
-      <span class="glyphicon glyphicon-search white" role="presentation"></span> Cerca
-    <% end %>
-    <%= link_to root_path, role: "menuitem", data: {turbolinks: "false"} do %>
-      <span class="glyphicon glyphicon-home white" role="presentation"></span> Home
-    <% end %>
-    <% if user_signed_in? %>
-      <%= link_to edit_user_registration_path, role: "menuitem" do %>
-        <span class="glyphicon glyphicon-cog white" role="presentation"></span> Modifica profilo
-      <% end %>
-      <%= link_to destroy_user_session_path, method: 'delete', role: "menuitem" do %>
-        <span class="glyphicon glyphicon-off white" role="presentation"></span> Logout
-      <% end %>
+        <%= link_to destroy_user_session_path, method: 'delete', role: "menuitem" do %>
+          <span class="glyphicon glyphicon-off white" role="presentation"></span> Logout
+        <% end %>
+        <%= link_to edit_user_registration_path, role: "menuitem" do %>
+          <span class="glyphicon glyphicon-cog white" role="presentation"></span> Modifica profilo
+        <% end %>
+        <% if current_user.has_role? :admin %>
+          <%= link_to admin_root_path, :role => "menuitem" do %>
+            <span class="glyphicon glyphicon-asterisk white" role="presentation"></span> Gestisci
+          <% end %>
+        <% end %>
       <% else %>
-	    <%= link_to new_user_registration_path, role: "menuitem", data: {turbolinks: "false"} do %>
-        <span class="glyphicon glyphicon-cog white" role="presentation"></span> Nuovo Utente
+  	    <%= link_to new_user_registration_path, role: "menuitem", data: {turbolinks: "false"} do %>
+          <span class="glyphicon glyphicon-cog white" role="presentation"></span> Nuovo Utente
+        <% end %>
+        <%= link_to "#", role: "menuitem", id: 'login', data: {turbolinks: "false", toggle: "modal", target: "#login_modal", keyboard: "false" }  do %>
+          <span class="glyphicon glyphicon-cog white" role="presentation"></span> Login
+        <% end %>
+        <%= render 'layouts/login_modal' %>
       <% end %>
-      <%= link_to "#", role: "menuitem", id: 'login', data: {turbolinks: "false", toggle: "modal", target: "#login_modal", keyboard: "false" }  do %>
-        <span class="glyphicon glyphicon-cog white" role="presentation"></span> Login
+      <%= link_to search_index_path, role: "menuitem", data: {turbolinks: "false"} do %>
+        <span class="glyphicon glyphicon-search white" role="presentation"></span> Cerca
       <% end %>
-      <%= render 'layouts/login_modal' %>
-    <% end %>
+      <%= link_to root_path, role: "menuitem", data: {turbolinks: "false"} do %>
+        <span class="glyphicon glyphicon-home white" role="presentation"></span> Home
+      <% end %>
     </nav>
   </div>
