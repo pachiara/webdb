@@ -29,7 +29,7 @@ class SearchController < ApplicationController
       when '3' # indirizzo IP
         @instances = Instance.joins(:server).where("servers.manage = ? AND servers.ip LIKE ?", manage, "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
       when '4' # servizio
-        @instances = Instance.joins(:server).where("servers.manage = ?", manage).joins(:service).where("service.description LIKE ?", "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
+        @instances = Instance.joins(:server).where("servers.manage = ?", manage).joins(:service).where("services.description LIKE ?", "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
       when '5' # sistema operativo
         @instances = Instance.joins(:server).where("servers.manage = ?", manage).joins(:operating_system).where("operating_system.description LIKE ?", "%#{searched}%").order("servers.ip").page(params[:page]).per(params[:per_page])
     end
